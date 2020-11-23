@@ -1,0 +1,123 @@
+{% extends 'pages/storelayouts.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+    <!-- Carousel indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for carousel items -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'assets/images/storebg.png' %}" style="width: 100%;" alt="First Slide">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'assets/images/storebg.png' %}" style="width: 100%;" alt="Second Slide">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'assets/images/storebg.png' %}" style="width: 100%;" alt="Third Slide">
+        </div>
+    </div>
+    <!-- Carousel controls -->
+    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+<div class="container">
+    <!-- Begining of quickinfo -->
+    <div class="quickinfo">
+        <div class="row">
+            <div class="col ">
+                <img class="auto" src="{% static 'assets/images/Group 51.png' %}">
+            </div>
+            <div class="col">
+                <img class="auto" src="{% static 'assets/images/Group 50.png' %}">
+            </div>
+           <div class="col">
+                <img class="auto" src="{% static 'assets/images/Group 49.png' %}">
+            </div>
+            <div class="col">
+                <img class="auto" src="{% static 'assets/images/Group 53.png' %}">
+            </div>
+        </div>
+    </div>
+    <!-- end of quick info -->
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 hide">
+            <p class="category">Category</p>
+            {% for cate in categories %}
+            <ul class="cate"> 
+                <li class="listCate"><a href="#">{{ cate.name}}</a></li>
+            </ul>
+            {% endfor %}
+        </div>
+        <div class="col-md-10 col-sm-12">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-4 col-sm-12">
+                    <div class="w3-card">
+                        <img class="rself" src="{{ product.imageURL }}" style="width: 100%;">
+                    <div>
+                       <div class="container">
+                            <h5 class="product_title">{{ product.name }}</h5>
+                            <p>{{ product.description }}</p>
+                            <p style="font-weight: bold;">{{ product.category }}</p>
+                            <div class="row" style="margin-top: 12px;">
+                                <div class="col">
+                                    <p>${{ product.price|floatformat:2 }}</p>
+                                </div>
+                                <div class="col">
+                                    <button data-product={{product.id}} data-action="add" class="btn btn-success add-btn button update-cart">Add to Cart</button>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button class="btn btn-outline-dark btn-block"> <i class="fa fa-recycle"></i> see more</button>
+    </div>
+    <div class="featured">
+        <h3>Featured Product</h3>
+        <ul>
+        {% for cate in categories %}
+            <li><a href="">{{ cate.name }}</a></li>
+         {% endfor %}
+        </ul>
+    </div>
+    <div class="row" style="margin-bottom: 40px;">
+        <div class="col-md-3 col-sm-12">
+            <div class="w3-card">
+                <img class="rself" src="{% static 'assets/images/Untitled-4.png' %}" style="width: 100%;">
+            <div>
+               <div class="container">
+                    <h5 class="product_title">A4 Letter head</h5>
+                    <p>214mm by 120mm I Rim B4 paper</p>
+                    <div class="row" style="margin-top: 12px;">
+                        <div class="col">
+                            <p>$5000</p>
+                        </div>
+                        <div class="col">
+                            <button class=" btn btn-success button ">Add to Cart</button>
+                        </div>
+                    </div>
+               </div>
+            </div>
+            </div>
+        </div>
+        <button class="btn btn-outline-dark btn-block"> <i class="fa fa-recycle"></i> see more</button>
+    </div>
+</div>
+{% endblock %}

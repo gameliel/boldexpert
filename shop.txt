@@ -1,0 +1,33 @@
+Graphine shop structure
+1. shop structure-------|
+    part 1| Configure app
+    part 2| Templates
+    part 3| Views and Urls
+    part 4| Static files
+    part 5| Main Templates
+    part 6| Navbar
+    part 7| Store.html
+    part 8| cart.html
+    part 9| checkout.html
+
+2. Data structure
+    part 1| Models
+    part 2| Render Products
+    part 3| Products image field
+    part 4| User cart
+
+3. Site Functionalities
+    part 1| Add to cart
+    part 2| Update cart
+    part 3| Shipping address
+    part 4| checkout form
+    part 5| process orders
+
+4. Guest checkout
+    part 1| Set cookies
+    part 2| Render cart Total
+    part 3| Build order
+    part 4| cookieCart{} Function
+    part 5| cartData{}
+    part 6| Checkout
+5. Payment integration

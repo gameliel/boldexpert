@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--  -->
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Simvic Blog</title>
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'assets/css/header.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/default.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/w3.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/js_composer.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- jQuery and JS bundle w/ Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <!--  -->
+ <style>
+  /* Make the image fully responsive */
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+.icon {
+    color: #666;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 600;
+}
+.green{
+    color: #666;
+}
+.red{
+    color: #666;
+}
+.current{
+    margin-left: 12px;
+    font-weight: 300;
+}
+h5{
+    color: #514040;
+}
+h4{
+    color: #514040;
+}
+</style>
+</head>
+<body>
+    <header class="header-area">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'assets/images/boldexperts.png' %}" alt=""></a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <div class="nav-item dropdown">
+                        <a href="{% url 'home' %}" class="nav-link dropdown-toggle" data-toggle="dropdown">Agency</a>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'expertise' %}" class="dropdown-item">Expertises</a>
+                            <a href="{% url 'approach' %}" class="dropdown-item">Approach</a>
+                            <a href="{% url 'people' %}" class="dropdown-item">Team</a>
+                            <a href="#" class="dropdown-item">Legal</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-item nav-link active">Portfolio</a>
+                    <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
+                    <div class="nav-item dropdown">
+                        <a href="{% url 'contact' %}" class="nav-link dropdown-toggle" data-toggle="dropdown">Contact</a>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'contact1' %}" class="dropdown-item">Commercial</a>
+                            <a href="#" class="dropdown-item">Internship</a>
+                        </div>
+                    </div>
+                    <a href="{% url 'store' %}" class="nav-item nav-link active">Store</a>
+                </div>
+                <div class="navbar-nav">
+                    <a href="#" class="nav-item nav-link">Login</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- End of header area -->
+    {% block content %}
+    {% endblock %}
+
+<footer>
+{% block prescribe %}
+
+{% endblock %}
+<div class="container" style="padding-top:70px; padding-bottom: 70px;">
+    <div class="row">
+        <div class="col">
+            <h4>Paris agency</h4>
+            <p>3 rue des Montiboeufs
+                75020 - Paris France</p>
+        </div>
+        <div class="col">
+            <h4>Lyon agency</h4>
+            <p>3 rue Abbé Rozier
+                69001 - Lyon France</p>
+        </div>
+        <div class="col">
+            <h4>Contact us</h4>
+            <p>Tel: +33 (0)9 72 26 62 31
+                <span style="color: red;">Request a quotation</span></p>
+        </div>
+                <div class="col">
+            <h4>Follow us</h4>
+            <p>Tel: +33 (0)9 72 26 62 31
+                <span style="color: red;">Request a quotation</span></p>
+        </div>
+
+    </div>
+</div>
+</footer>
+</body>
+</html>
