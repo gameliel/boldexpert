@@ -1,2 +1,4 @@
-# Boldexpert
-# A portfolio site and also with a shoping page built with python
+# Content of Boldexpert
+- Boldexpert landing page and other sub pages
+- Blog 
+- store
