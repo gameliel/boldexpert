@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     description = models.CharField(max_length=50, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     digital = models.BooleanField(default=False, null=True, blank=False)
