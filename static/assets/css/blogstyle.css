@@ -73,3 +73,7 @@ ul > li > a:hover{
     text-decoration: none;
     color: inherit;
 }
+.title{
+    font-size: 80px !important;
+    text-transform: capitalize;
+}

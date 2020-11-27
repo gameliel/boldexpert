@@ -170,4 +170,29 @@ footer{
     text-decoration: none;
     color: black;
 }
-
+/* Hot deals */
+.Hot_deals{
+    margin-top: 30px;
+}
+.Hot_deals > ul{
+    background-color: transparent;
+    border-bottom-style: solid;
+    border-color: black;
+}
+.Hot_deals > ul > li{
+    display:  inline;
+    padding: 12px 14px;
+    margin-top: 12px;
+    padding-bottom: 3px;
+}
+.Hot_deals > ul > li:hover{
+    background-color: black;
+    color: white;
+}
+.Hot_deals > ul > li > a{
+    margin-top: 12px;
+}
+.Hot_deals > ul > li > a:hover {
+    text-decoration: none;
+    color: white;
+}
