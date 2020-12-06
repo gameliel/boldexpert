@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'portfolio',
+    'tinymce',
     'store.apps.StoreConfig',
 ]
 
@@ -75,6 +76,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'codingmadesimple.wsgi.application'
+TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'
+TINYMCE_COMPRESSOR = False
+# TINYMCE_JS_URL = os.path.join(BASE_DIR, "path/to/tinymce")
+# TINYMCE_COMPRESSOR = True
 
 
 # Database

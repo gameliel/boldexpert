@@ -1,11 +1,17 @@
 from django.shortcuts import render
+from posts.models import Post
+from portfolio.models import Portfolio
 
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'pages/home.html')
+    #line 11 and 12 is to filter latest post, portfolio from DB not more than 4 
+    posts = Post.objects.filter(status=1).order_by('-created_on')[:8]
+    portfolios = Portfolio.objects.filter(status=1).order_by('-created_on')[:8]
+    context = {'posts':posts, 'portfolios':portfolios}
+    return render(request, 'pages/home.html', context,)
 
 def expertise(request):
     return render(request, 'pages/expertise.html')
@@ -24,3 +30,6 @@ def contact(request):
 
 def contact1(request):
     return render(request, 'pages/contact1.html')
+
+def legal(request):
+    return render(request, 'pages/legal.html')

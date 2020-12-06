@@ -17,7 +17,7 @@
                 <span style="color: #999999;">
                     <span style="font-size: 36pt;">
                         Design<br>
-                        & culture visulle
+                        post_detail            & culture visulle
                     </span>
                 </span>
             </h1>
@@ -26,34 +26,47 @@
                 <ul>
                     <li class="active"><a href="#">All</a></li>
                     {% for category in categories %}
-                    <li class="active"><a href="#">{{ category.name }}</a></li>
+                    <li class="active"><a href="{% url 'blog_category' category.name %}">{{ category.name }}</a></li>
                     {% endfor %}
                 </ul>
             </nav>
         </div>
-        <div class="col-md-8 col-lg-8 col-sm-12">
-            <img src="{% static 'assets/images/grapheine blog banner.png' %}" style="width: 100%;" alt="">
+        {% for recent in recents%}
+        <div class="col-md-8 col-sm-6">
+            <img src="{{ recent.image.url }}" style="width: 100%;" alt="">
             <div class="caption" style="padding-top: 10px;">
-                <p>03-03-2020</p>
-                <p class="first-blog">Parlez-vous yerkish, la langue des singes ?</p>
-                <p>Imaginez un langage muet, sans lettres et sans mots, pour des non-humains. Sous vos
-                    yeux se dessine le yerkish, langage pour communiquer avec les singes.</p>
+                <small>
+                    {{ recent.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+                    {% for category in post.categories.all %}
+                        <a href="{% url 'blog_category' category.name %}">
+                            {{ category.name }}
+                        </a>&nbsp;
+                    {% endfor %}
+                </small>
+                <p class="first-blog">{{ recent.body|slice:":120" }}</p>
             </div>
         </div>
+        {%endfor%}
     </div>
     <div class="row" style="margin-top: 30px;">
         {% for post in posts %}
-        <div class="col-md-4 col-lg-4 col-sm-12">
-            <img src="{{ post.image.url }}" style="width: 100%;" alt="2nd">
+        <div class="col-md-3 col-lg-3 col-sm-12">
+            <hr>
+            <a href="{% url 'post_detail' post.id %}">
+                <img src="{{ post.image.url }}" class="w3-card" style="width: 100%;" alt="2nd">
+            </a>
             <div class="caption" style="padding-top: 10px;">
-                <div class="row">
-                                        
-                </div>
-                <p>{{ post.created_at }}</p>
-                <p class="first-blog">{{ post.title }}</p>
-                <p>{{ post.author }}| {{ post.created_on }}</p>
-                <p>{{ post.body|slice:":100" }}</p>
-                <a href="{% url 'post_detail' post.id %}"><input type="submit" class="btn btn-primary btn-block" value="Read More"></a>
+                <small>
+                    {{ post.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+                    {% for category in post.categories.all %}
+                        <a href="{% url 'blog_category' category.name %}">
+                            {{ category.name }}
+                        </a>&nbsp;
+                    {% endfor %}
+                </small>
+                <p>{{ post.body | slice:":120" }}</p>          
             </div>
         </div>
         {% endfor %}

@@ -8,6 +8,7 @@
     <title>Simvic Blog</title>
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/w3.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/blogstyle.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -42,10 +43,10 @@
                             <a href="{% url 'expertise' %}" class="dropdown-item">Expertises</a>
                             <a href="{% url 'approach' %}" class="dropdown-item">Approach</a>
                             <a href="{% url 'people' %}" class="dropdown-item">Team</a>
-                            <a href="#" class="dropdown-item">Legal</a>
+                            <a href="{% url 'legal' %}" class="dropdown-item">Legal</a>
                         </div>
                     </div>
-                    <a href="#" class="nav-item nav-link active">Portfolio</a>
+                    <a href="{% url 'portfolio' %}" class="nav-item nav-link active">Portfolio</a>
                     <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
                     <div class="nav-item dropdown">
                         <a href="{% url 'contact' %}" class="nav-link dropdown-toggle" data-toggle="dropdown">Contact</a>

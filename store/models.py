@@ -23,6 +23,8 @@ class Product(models.Model):
     description = models.CharField(max_length=50, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     digital = models.BooleanField(default=False, null=True, blank=False)
+    hot = models.BooleanField(default=False, null=True, blank=False)
+    featured = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
     
     def __str__(self):

@@ -71,88 +71,15 @@
 </div>
 <div class="container" style="padding-top: 30px;">
   <div class="row">
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/1.gif' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
+    {% for portfolio in portfolios %}
+    <div class="col-md-3 col-lg-3 col-sm-6">
+        <a href="{% url 'detailed' portfolio.id %}"><img src="{{ portfolio.image.url }}" style="width: 100%;" alt="2nd"></a>
+        <div class="caption" style="padding-top: 10px;">
+            <p class="first-blog">{{ portfolio.title }}</p>
+            <p>{{ portfolio.description|slice:":100" }}</p>
+        </div>
     </div>
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/2.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/3.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Paris Sports Courses</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/4.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div class="row" style="padding-top: 30px;">
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/5.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/6.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/7.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-    <div class="col">
-      <img src="{% static 'assets/images/portfolio/1.gif' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
 <div class="container" style="padding-top: 30;">
@@ -175,59 +102,26 @@
 <!-- Blog section -->
 <div class="container" style="padding-top: 30px;">
   <div class="row">
-    <div class="col">
-      <img src="{% static 'assets/images/blog/1.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <p>29-09-2020</p>
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
+    {% for post in posts %}
+        <div class="col-md-3 col-lg-3 col-sm-12">
+            <hr>
+            <a href="{% url 'post_detail' post.id %}"><img src="{{ post.image.url }}" style="width: 100%;" alt="2nd"></a>
+            <div class="caption" style="padding-top: 10px;">
+                <small>
+                    {{ post.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+                    {% for category in post.categories.all %}
+                        <a href="{% url 'blog_category' category.name %}">
+                            {{ category.name }}
+                        </a>&nbsp;
+                    {% endfor %}
+                </small>
+                <b><p>{{ post.title }}</p></b>
+                <p>{{ post.body | slice:":120" }}</p>          
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    <div class="col">
-      <img src="{% static 'assets/images/blog/2.gif' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <p>29-09-2020</p>
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-    <div class="col">
-      <img src="{% static 'assets/images/blog/3.jpg' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <p>29-09-2020</p>
-        <h5>Paris Sports Courses</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-    <div class="col">
-      <img src="{% static 'assets/images/blog/4.gif' %}" style="width:100%;" alt="first">
-      <div class="caption">
-        <p>29-09-2020</p>
-        <h5>Eurex, accountancy and consulting – Visual identity</h5>
-        <span style="color: #999999;">
-          <p>Graphéine updates the brand image of Eurex, an international
-          accounting and consulting group, in constant growth since its creation.</p>
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %}
-{% block prescribe %}
-<div class="prescription" style="height: 160px; width: 100%; background: #ff0000; margin-top: 40px;">
-  <div class="container">
-    <h2 style="font-weight: 100; color: white; padding-top: 60px;">
-        Need a prescription? <span style="font-weight: initial; margin-left: 560px;"> > </span>
-    </h2>
   </div>
 </div>
 {% endblock %}

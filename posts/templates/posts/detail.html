@@ -6,21 +6,17 @@
 <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" style="margin-top: 94px;">
     <!-- Carousel indicators -->
     <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+    {% for p in photos %}
+        <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %} active {% endif %}"></li>
+    {% endfor %}
     </ol>
     <!-- Wrapper for carousel items -->
     <div class="carousel-inner">
+        {% for p in photos %}
         <div class="carousel-item active">
-            <img src="{% static 'assets/images/storebg.png' %}" style="width: 100%;" alt="First Slide">
+            <img src="{{ p.image.url }}" style="width: 100%; height: 500px;" alt="First Slide">  
         </div>
-        <div class="carousel-item">
-            <img src="{% static 'assets/images/storebg.png' %}" style="width: 100%;" alt="Second Slide">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static 'assets/images/storebg.png' %}" style="width: 100%;" alt="Third Slide">
-        </div>
+        {% endfor %}
     </div>
     <!-- Carousel controls -->
     <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
@@ -31,17 +27,48 @@
     </a>
 </div>
 <div class="container">
+    <h1>{{ post.title }}</h1>
     <div class="row">
         <div class="col-md-8 col-sm-12">
-            <h2 class="title">{{ post.title }}</h2>
-            <img src="{{ post.image.url }}" style="width: 100%;" alt="2nd">
-      
-            <p>{{ post.created_at }}</p>
-            <hr>
-            <p>{{ post.body }}</p>
-            {% for p in photos %}
-            <img src="{{ p.imageURL }}" style="width:100%;" alt="">
+            <img src="{{ post.image.url }}" style="width: 100%;" class="card" alt="2nd">
+            <!-- <h3>{{ post.title }}</h3> -->
+            <small>
+                {{ post.created_on.date }} |&nbsp;
+                Categories:&nbsp;
+                {% for category in post.categories.all %}
+                    <a href="{% url 'blog_category' category.name %}">
+                        {{ category.name }}
+                    </a>&nbsp;
+                {% endfor %}
+            </small>
+            <h5>About the project:</h5>
+            <p>{{ post.body | linebreaks }}</p>
+            <br>
+            <h3>Leave a comment</h3>
+            <form action="/blog/{{ post.id }}/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.author }}
+                </div>
+                <div class="form-group">
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.body }}
+                </div>
+                <button class="btn btn-primary" type="submit">Send</button>
+            </form>
+            {% for comment in comments %}
+                <p>
+                    On {{ comment.created_on.date }}&nbsp;
+                    <b>{{ comment.author }}</b> wrote:
+                </p>
+                <p> {{ comment.body }}</p>
+                <hr>
             {% endfor %}
+        </div>
+        <div class="col-md-4">
+          
         </div>
     </div>
 </div>

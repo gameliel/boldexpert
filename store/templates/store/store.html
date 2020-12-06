@@ -102,10 +102,29 @@
         </div>
         <div class="col-md-6">
             <img src="{% static 'assets/images/banner1.png' %}" style="width: 100%;" alt="">
-            <div class="row">
-                <div class="col-md-6">
-                    
+            <div class="row" style="margin-top: 25px;">
+                    {% for hot in hots %}
+                <div class="col-md-6 col-sm-12">
+                    <div class="w3-card">
+                        <img class="rself" src="{{ hot.imageURL }}" style="width: 100%;">
+                    <div>
+                       <div class="container">
+                            <h5 class="product_title">{{ hot.name }}</h5>
+                            <p>{{ product.description }}</p>
+                            <p style="font-weight: boldproducts;">{{ hot.category }}</p>
+                            <div class="row" style="margin-top: 12px;">
+                                <div class="col">
+                                    <p>${{ hot.price|floatformat:2 }}</p>
+                                </div>
+                                <div class="col">
+                                    <button data-product={{ product.id }} data-action="add" class="btn btn-success add-btn button update-cart">Add to Cart</button>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

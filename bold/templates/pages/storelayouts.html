@@ -50,47 +50,23 @@ h4{
 <script type="text/javascript">
     var user = '{{ request.user }}'
 
-    function getToken(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
+        return cookieValue;
     }
-    return cookieValue;
-}
-const csrftoken = getToken('csrftoken');
-
-function getCookie(name){    //loop through the array elements
-    // split cookie string and get all individual name=value pairs in an array
-    var cookieArr = document.cookie.split(";");
+    const csrftoken = getToken('csrftoken');
     
-    // loop through the array elments
-    for(i = 0; i < cookieArr.length; i++){
-        var cookiePair = cookieArr[i].split("=");
-        /* Remove white space at the begining of the array name
-            and comapre it with the given string */
-        if(name == cookiePair[0].trim()){
-            //Decode the cookie value and return 
-            return decodeURIComponent(cookiePair[i]);
-        }
-    }
-    // return null if not found
-    return null;
-}
-var cart = JSON.parse(getCookie('cart'));
-if(cart == undefined){
-    cart = {}
-    console.log("cart was created..")
-    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-}
-console.log('Cart:', cart)
 </script>
 </head>
 <body>
@@ -109,10 +85,10 @@ console.log('Cart:', cart)
                             <a href="{% url 'expertise' %}" class="dropdown-item">Expertises<span class="sr-only">(current)</span></a>
                             <a href="{% url 'approach' %}" class="dropdown-item">Approach<span class="sr-only">(current)</span></a>
                             <a href="{% url 'people' %}" class="dropdown-item">Team<span class="sr-only">(current)</span></a>
-                            <a href="#" class="dropdown-item">Legal<span class="sr-only">(current)</span></a>
+                            <a href="{% url 'legal' %}" class="dropdown-item">Legal<span class="sr-only">(current)</span></a>
                         </div>
                     </div>
-                    <a href="#" class="nav-item nav-link">Portfolio<span class="sr-only">(current)</span></a>
+                    <a href="{% url 'portfolio' %}" class="nav-item nav-link">Portfolio<span class="sr-only">(current)</span></a>
                     <a href="{% url 'blog' %}" class="nav-item nav-link">Blog<span class="sr-only">(current)</span></a>
                     <div class="nav-item dropdown">
                         <a href="{% url 'contact' %}" class="nav-link dropdown-toggle" data-toggle="dropdown">Contact<span class="sr-only">(current)</span></a>
@@ -140,34 +116,56 @@ console.log('Cart:', cart)
         {% endblock %}
 
 <footer>
-{% block prescribe %}
-
-{% endblock %}
-<div class="container" style="padding-top:70px; padding-bottom: 70px;">
-    <div class="row">
-        <div class="col">
-            <h4>Paris agency</h4>
-            <p>3 rue des Montiboeufs
-                75020 - Paris France</p>
+    <div class="footer">
+        <div class="container">
+            <div class="row" style="padding-top: 20px; padding-bottom: 29px;">
+                <div class="col-md-3">
+                    <h5 style="color: white; font-weight: bold;">Contact us</h5>
+                    <i class="fa fa-phone"></i>
+                    <p style="margin-top: -23px; margin-left: 20px;">(+234)9026190497 </p>
+                    <i class="fa fa-envelope"></i>
+                    <p style="margin-top: -23px; margin-left: 20px;">info@boldexperts.co.uk</p>
+                    <i class="fa fa-map"></i>
+                    <p style="margin-top: -23px; margin-left: 20px;">Location store</p>
+                </div>
+                <div class="col-md-3">
+                    <h5 style="color: white; font-weight: bold;">Policies & info</h5>
+                    <p>Terms Conditions</p>
+                    <p>Policy for Sellers</p>
+                    <p>Policy for Buyers</p>
+                    <p>Shipping & Refund</p>
+                    <p>Wholesale Policy</p>
+                </div>
+                <div class="col-md-3 qnav" >
+                    <h5 style="color: white; font-weight: bold;">Policies & info</h5>
+                    <a href=""><p>Agency</p></a>
+                    <a href=""><p>Portfolio</p></a>
+                    <a href=""><p>Blog</p></a>
+                    <a href=""><p>Contact</p></a>
+                    <a href=""><p>Team</p></a>
+                    <a href=""><p>Shop</p></a>
+                    <a href=""><p>Legal</p></a>
+                </div>
+                <div class="col-md-3">
+                    <h5 style="color: white; font-weight: bold;">Subscribe now</h5>
+                    <p>Contrary to popular belief of lorem Ipsm
+                        Latin amet ltin from.</p>
+                        <form class="form-inline d-flex  md-form form-sm mt-0" style="margin-left: -15px;">
+                            <input class="form-control form-control-sm ml-3 w-75" style="height: 35px; border-radius: 20px;" type="text" placeholder="Search"
+                              aria-label="Search">
+                              <i class="fa fa-paper-plane btn btn-primary" aria-hidden="true" style="border-radius: 20px; margin-left: -40px; background: #ffc114; border-color: #ffc114;
+                          }"></i>
+                          </form>
+                </div>
+            </div>
         </div>
-        <div class="col">
-            <h4>Lyon agency</h4>
-            <p>3 rue Abbé Rozier
-                69001 - Lyon France</p>
-        </div>
-        <div class="col">
-            <h4>Contact us</h4>
-            <p>Tel: +33 (0)9 72 26 62 31
-                <span style="color: red;">Request a quotation</span></p>
-        </div>
-                <div class="col">
-            <h4>Follow us</h4>
-            <p>Tel: +33 (0)9 72 26 62 31
-                <span style="color: red;">Request a quotation</span></p>
-        </div>
-
     </div>
-</div>
+    <div class="copywrite">
+        <hr style="background-color: rgb(58, 52, 52);">
+        <div class="container">
+            <p>Copyright © 2020 Simvic</p>
+        </div>
+    </div>
 </footer>
 <script src="{% static 'assets/js/cart.js' %}"></script>
 </body>

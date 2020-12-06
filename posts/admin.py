@@ -6,26 +6,27 @@ class PostImageAdmin(admin.StackedInline):
     model = PostImage
 
 
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'author', 'status', 'image', 'created_on')
+    search_fields = ['title', 'description']
     inlines = [PostImageAdmin]
 
     class Meta:
-        model=Post
+        model = Post
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'Category', 'slug', 'status', 'image', 'created_on')
-    list_filter = ("status", "Category",)
-    search_fields = ['title', 'body']
-    prepopulated_fields = {'slug': ('title',)}
-
-
-admin.site.register(Post, PostAdmin)
-
-
+@admin.register(PostImage)
 class PostImageAdmin(admin.ModelAdmin):
     pass
 
+class CategoryAdmin(admin.ModelAdmin):
+    pass
 
-admin.site.register(PostImage, PostImageAdmin)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['author', 'post', 'body', 'created_on']
 
-admin.site.register(Category)
+    class Meta:
+        model = Comment
+
+admin.site.register(Category, CategoryAdmin)

@@ -1,0 +1,57 @@
+{% extends 'pages/bloglayouts.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 120px;">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <h1>
+                <span style="font-size: 36pt;">Portfolio</span>
+                <span style="font-size: 36pt;">
+                    <span style="color: #ff0000;">
+                        .<br/>
+                    </span>
+                </span>
+                <span style="color: #999999;">
+                    <span style="font-size: 36pt;">
+                        Design<br>
+                        & culture visulle
+                    </span>
+                </span>
+            </h1>
+            <hr>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#">All</a></li>
+                    {% for category in categories %}
+                    <li class="active"><a href="#">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-8 col-lg-8 col-sm-12">
+            <img src="{% static 'assets/images/grapheine blog banner.png' %}" style="width: 100%;" alt="">
+            <div class="caption" style="padding-top: 10px;">
+                <p>03-03-2020</p>
+                <p class="first-blog">Parlez-vous yerkish, la langue des singes ?</p>
+                <p>Imaginez un langage muet, sans lettres et sans mots, pour des non-humains. Sous vos
+                    yeux se dessine le yerkish, langage pour communiquer avec les singes.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for portfolio in portfolios %}
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <a href="{% url 'detailed' portfolio.id %}"><img src="{{ portfolio.image.url }}" style="width: 100%;" alt="2nd"></a>
+            <div class="caption" style="padding-top: 10px;">
+                <p class="first-blog">{{ portfolio.title }}</p>
+                <p>{{ portfolio.description|slice:":100" }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
