@@ -2,7 +2,8 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
-from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Category(models.Model):
@@ -20,7 +21,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete= models.CASCADE,related_name='blog_posts', null=True)
     updated_on = models.DateTimeField(auto_now= True)
-    body = HTMLField()
+    body = RichTextUploadingField()
     categories = models.ManyToManyField('Category', default=None, related_name='posts')
     image = models.ImageField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True, null=True)

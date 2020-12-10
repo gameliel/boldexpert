@@ -1,0 +1,84 @@
+{% extends 'pages/storelayouts.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container" style="padding-top: 130px;"> 
+    <div class="row">
+        <div class="col-md-8 w3-card-4" style="margin-left: 20px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" style="padding-top: 24px;">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                        {% for p in photos %}
+                            <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %} active {% endif %}"></li>
+                        {% endfor %}
+                        </ol>
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                            {% for p in photos %}
+                            <div class="carousel-item active">
+                                <img src="{{ p.image.url }}" style="width: 100%;" alt="First Slide">  
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Carousel controls -->
+                        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-8" style="margin-top: 24px;">
+                    <h3>{{ product.name}}</h3>
+                    <small>
+                        Categories: {{ product.category }}
+                    </small>
+                    <hr>
+                    <b><h3>${{ product.price }}</h3></b>
+                    <a data-product={{product.id}} data-action="add" class="btn btn-success add-btn button update-cart card">Add to cart</a>
+                    <hr>
+                    <p>offers starticartItemsng from: <b>${{ product.price }}</b></p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 offset w3-card-4" style="margin-left: 55px; margin-bottom: ;">
+            <div class="container">
+                <h5 style="text-transform: uppercase; text-align: center; margin-top: 20px;;">Delivery & Returns</h5>
+                <hr>
+                <i class="fa fa-car" style="font-size: 30px;"></i>
+                    <p style="display: inline;">Delivery Information <br>
+                        Normally delivered between Thursday 10 Dec and Tuesday 15 Dec. 
+                        Please check exact dates in the Checkout
+                    </p>
+                    <hr>
+                <i class="fa fa-undo" style="font-size: 30px;"></i>
+                <p style="display: inline;">
+                    Return Policy <br>
+                    Free return within 015 days for Jumia Mall items and 7 days for 
+                    other eligible items.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+        <div class="col-md-8 card" style="margin-left: 20px;">
+            <div class="container">
+                <div class="card-head">
+                    <h4 style="text-transform: capitalize;">product details</h4>
+                </div>
+                <hr>
+                <div class="card-body"> 
+                    <p>{{ product.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

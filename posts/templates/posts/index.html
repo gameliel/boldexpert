@@ -33,18 +33,20 @@
         </div>
         {% for recent in recents%}
         <div class="col-md-8 col-sm-6">
-            <img src="{{ recent.image.url }}" style="width: 100%;" alt="">
+            <a href="{% url 'post_detail' recent.id %}">
+                <img src="{{ recent.image.url }}" class="w3-card" style="width: 100%;" alt="2nd">
+            </a>
             <div class="caption" style="padding-top: 10px;">
                 <small>
                     {{ recent.created_on.date }} |&nbsp;
                     Categories:&nbsp;
-                    {% for category in post.categories.all %}
+                    [1:]         {% for category in post.categories.all %}
                         <a href="{% url 'blog_category' category.name %}">
                             {{ category.name }}
                         </a>&nbsp;
                     {% endfor %}
                 </small>
-                <p class="first-blog">{{ recent.body|slice:":120" }}</p>
+                <p class="first-blog">{{ recent.body| safe |slice:":120" }}</p>
             </div>
         </div>
         {%endfor%}
@@ -66,7 +68,7 @@
                         </a>&nbsp;
                     {% endfor %}
                 </small>
-                <p>{{ post.body | slice:":120" }}</p>          
+                <p>{{ post.body | safe | slice:":120" }}</p>          
             </div>
         </div>
         {% endfor %}

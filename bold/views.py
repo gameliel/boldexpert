@@ -14,10 +14,14 @@ def home(request):
     return render(request, 'pages/home.html', context,)
 
 def expertise(request):
-    return render(request, 'pages/expertise.html')
+    portfolios = Portfolio.objects.filter(status=1).order_by('-created_on')[:6]
+    context = {'portfolios':portfolios}
+    return render(request, 'pages/expertise.html', context)
 
 def approach(request):
-    return render(request, 'pages/approach.html')
+    portfolios = Portfolio.objects.filter(status=1).order_by('-created_on')[:12]
+    context = {'portfolios':portfolios}
+    return render(request, 'pages/approach.html', context)
 
 def people(request):
     return render(request, 'pages/people.html')

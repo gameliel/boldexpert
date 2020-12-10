@@ -1,5 +1,8 @@
 from django.db import models
 
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
 class Category(models.Model):
     name = models.CharField(max_length=300, null=True)
 
@@ -9,7 +12,7 @@ class Category(models.Model):
 # Create your models here.
 class Portfolio(models.Model):
     title = models.CharField(max_length=100, null=True)
-    description = models.TextField()
+    description = RichTextUploadingField()
     image = models.FileField(blank=True)
     status = models.BooleanField(default=None, null=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null=True)

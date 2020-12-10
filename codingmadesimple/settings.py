@@ -41,9 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portfolio',
-    'tinymce',
+    'ckeditor',
+    'ckeditor_uploader',
     'store.apps.StoreConfig',
+    'paystack',
 ]
+
+PAYSTACK_PUBLIC_KEY = 'pk_test_5a85f11f78f118a344d824e8575f72560b0a1546'
+PAYSTACK_SECRET_KEY = 'sk_test_2bb87d004d8bb756c40ee7e7a05f2abc7afedb9a'
+
+CKEDITOR_UPLOAD_PATH = 'images/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

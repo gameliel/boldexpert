@@ -66,24 +66,11 @@
             <h3 style="text-align: center; font-weight: 300 !important; color: #635f5f;">A few recent works</h3>
         </div>
         <div class="row mx-0">
+            {% for portfolio in portfolios %}
             <div class="col px-0">
-                <img src="{% static 'assets/images/r.gif' %}" style="width: 100%;" alt="">
+                <img src="{{ portfolio.image.url}}" style="width: 100%;" alt="">
             </div>
-            <div class="col px-0">
-                <img src="{% static 'assets/images/s.gif' %}" style="width: 100%;" alt="">
-            </div>
-            <div class="col px-0">
-                <img src="{% static 'assets/images/t.jpg' %}" style="width: 100%;" alt="">
-            </div>
-            <div class="col px-0">
-                <img src="{% static 'assets/images/u.jpg' %}" style="width: 100%;" alt="">
-            </div>
-            <div class="col px-0">
-                <img src="{% static 'assets/images/r.gif' %}" style="width: 100%;" alt="">
-            </div>
-            <div class="col px-0">
-                <img src="{% static 'assets/images/s.gif' %}" style="width: 100%;" alt="">
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

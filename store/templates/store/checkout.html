@@ -67,7 +67,8 @@
 
             <div class="box-element hidden" id="payment-info" style="margin-top: 12px;">
                 <small>Paystack Options</small>
-                <button id="make-payment" class="btn btn-primary">Make payment</button>
+                    <button type="button" onclick="payWithPaystack()"> Pay </button>  
+                <!-- <button id="make-payment" class="btn btn-primary">Make payment</button> -->
             </div>
         </div>    
 
@@ -91,9 +92,40 @@
         </div>    
     </div>
 </div>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script>
+    var total = '{{ order.get_cart_total }}'
+
+    function payWithPaystack(){
+    var handler = PaystackPop.setup({
+    key: 'pk_live_2444578b6c1cd4d47ec38060e19f1b2221db04ef',
+    email:'{{ user.email }}',
+    amount: parseFloat(total).toFixed(2),
+    currency: "NGN",
+    metadata: {
+    custom_fields: [
+    {
+    display_name: "Mobile Number",
+    variable_name: "mobile_number",
+    value: "{{phone}}"
+    }
+    ]
+    },
+    callback: function(response){
+        submitFormData()
+    },
+    onClose: function(){
+    alert('window closed');
+    }
+    });
+    handler.openIframe();
+    }
+    </script>
+
 <script type="text/javascript">
     var shipping = '{{order.shipping}}'
-    var total = '{{ order.get_cart_total }}'
+    // var total = '{{ order.get_cart_total }}'
 
     if (shipping == 'False'){
          document.getElementById('shipping-info').innerHTML = ''
@@ -116,10 +148,6 @@
         console.log('Form Submitted...')
         document.getElementById('form-button').classList.add("hidden");
         document.getElementById('payment-info').classList.remove("hidden");
-    })
-
-    document.getElementById('make-payment').addEventListener('click', function(e){
-        submitFormData()
     })
 
     function submitFormData(){

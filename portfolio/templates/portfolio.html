@@ -31,15 +31,15 @@
                 </ul>
             </nav>
         </div>
+        {% for recent in recents %}
         <div class="col-md-8 col-lg-8 col-sm-12">
-            <img src="{% static 'assets/images/grapheine blog banner.png' %}" style="width: 100%;" alt="">
+            <a href="{% url 'detailed' recent.id %}"> <img src="{{ recent.image.url }}" style="width: 100%;" alt=""></a>
             <div class="caption" style="padding-top: 10px;">
-                <p>03-03-2020</p>
-                <p class="first-blog">Parlez-vous yerkish, la langue des singes ?</p>
-                <p>Imaginez un langage muet, sans lettres et sans mots, pour des non-humains. Sous vos
-                    yeux se dessine le yerkish, langage pour communiquer avec les singes.</p>
+                <p class="first-blog">{{ recent.title }}</p>
+                <p>{{ recent.description|safe|slice:":130" }}</p>
             </div>
         </div>
+        {% endfor %}
     </div>
     <div class="row">
         {% for portfolio in portfolios %}

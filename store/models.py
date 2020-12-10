@@ -15,12 +15,12 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-        
+
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    description = models.CharField(max_length=50, null=True)
+    description = models.TextField(null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     digital = models.BooleanField(default=False, null=True, blank=False)
     hot = models.BooleanField(default=False, null=True, blank=False)
@@ -37,6 +37,13 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.product.name
 
 
 class Order(models.Model):

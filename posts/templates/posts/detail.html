@@ -42,7 +42,7 @@
                 {% endfor %}
             </small>
             <h5>About the project:</h5>
-            <p>{{ post.body | linebreaks }}</p>
+            <p>{{ post.body | safe | linebreaks }}</p>
             <br>
             <h3>Leave a comment</h3>
             <form action="/blog/{{ post.id }}/" method="post">

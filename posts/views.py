@@ -14,6 +14,7 @@ def blog(request):
 
 def detail_view(request, id):
     post = get_object_or_404(Post, id=id)
+    recent = get_object_or_404(Post, id=id)
     form = CommentForm()
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -26,7 +27,7 @@ def detail_view(request, id):
             comment.save()
     comments = Comment.objects.filter(post=post)
     photos = PostImage.objects.filter(post=post)
-    context = {'post':post, 'photos':photos, 'comments':comments, 'form':form}
+    context = {'post':post, 'recent':recent, 'photos':photos, 'comments':comments, 'form':form}
     return render(request, 'posts/detail.html', context)
 
 

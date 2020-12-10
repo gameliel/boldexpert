@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 import json
 import datetime
@@ -21,6 +21,23 @@ def store(request):
 	featured = Product.objects.filter(featured=1)
 	context = {'products':products, 'cartItems':cartItems, 'hots':hots, 'featured':featured}
 	return render(request, 'store/store.html', context)
+
+
+def detail_view(request, id):
+	if request.user.is_authenticated:
+		customer = request.user.customer
+		order, created = Order.objects.get_or_create(customer=customer, complete=False)
+		items = order.orderitem_set.all()
+		cartItems = order.get_cart_items
+	else:
+		items = []
+		order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+		cartItems = order['get_cart_items']
+
+	product = get_object_or_404(Product, id=id)
+	photos = ProductImage.objects.filter(product=product)
+	context = {'product':product, 'photos':photos, 'cartItems':cartItems}
+	return render(request, 'store/detail.html', context)
 
 def cart(request):
 
