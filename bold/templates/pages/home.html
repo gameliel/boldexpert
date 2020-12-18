@@ -35,16 +35,16 @@
 </div>
 <div class="container" style="padding-top:48px;">
   <div class="row">
-    <div class="col">
+    <div class="col-md-4 col-sm-12">
       <h1 style="color: #404040;">The communication agency that boosts your brand image!</h1>
     </div>
-    <div class="col">
+    <div class="col-md-4 col-sm-12">
       <p>Graphéine is a <b>branding agency</b> created in 2002 by like-minded and lively
           designers from various professional walks of life, all addicted to image.</p>
       <p>In this backdrop, all members use
         their skills to complement the whole. We are based in <b>Paris and Lyon, France.</b></p>
     </div>
-    <div class="col">
+    <div class="col-md-4 col-sm-12">
       <p><b>Indications:</b> Graphéine is recommended for all projects that involve
         strategy, brand creation, visual identity, publishing, signage and even more…</p>
       <p><b>Directions for use:</b> If symptoms appear, contact us immediately…</p>
@@ -76,7 +76,7 @@
         <a href="{% url 'detailed' portfolio.id %}"><img src="{{ portfolio.image.url }}" style="width: 100%;" alt="2nd"></a>
         <div class="caption" style="padding-top: 10px;">
             <p class="first-blog">{{ portfolio.title }}</p>
-            <p>{{ portfolio.description|slice:":100" }}</p>
+            <p>{{ portfolio.description|safe|slice:":100" }}</p>
         </div>
     </div>
     {% endfor %}
@@ -117,7 +117,7 @@
                     {% endfor %}
                 </small>
                 <b><p>{{ post.title }}</p></b>
-                <p>{{ post.body | slice:":120" }}</p>          
+                <p>{{ post.body |safe| slice:":120" }}</p>          
             </div>
         </div>
         {% endfor %}

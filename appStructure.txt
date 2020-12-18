@@ -1,3 +1,18 @@
-. employee_project
-|
-+--
+#navigation structure 
+
+# Explore == portfolio
+# Agency:
+    - Expertises
+    - Team
+    - Legal
+# Blog
+# Contact
+    - commercial
+    - internship
+- Shop/Store
+
+#Explore description:
+- there should be a banner for the explore page and contents filtering..
+
+#Blog view
+- banner for the blog view
