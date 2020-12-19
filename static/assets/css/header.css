@@ -14,3 +14,6 @@
     background-color: black;
     /* margin-top: 20px !important; */
 }
+.dropdown-item{
+  color: white !important;
+}
