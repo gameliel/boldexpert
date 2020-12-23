@@ -103,10 +103,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'boldexpert',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'eugene',
+        'PASSWORD': 'DaVid226@simvic.org',
         'HOST': 'localhost',
-        'PORT': ''
+        'PORT': '',
     }
 }
 
