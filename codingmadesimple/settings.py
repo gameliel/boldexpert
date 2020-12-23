@@ -25,7 +25,7 @@ SECRET_KEY = '(^y6s7mas2+yu^-t-k#ho64%&%$*$o%0(7ky*vrw^)amf^*ul!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['199.192.23.44']
 
 
 # Application definition
@@ -101,10 +101,15 @@ TINYMCE_COMPRESSOR = False
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'boldexpert',
-        'USER': 'eugene',
-        'PASSWORD': 'DaVid226@simvic.org',
+# <<<<<<< HEAD
+#         'USER': 'eugene',
+#         'PASSWORD': 'DaVid226@simvic.org',
+# =======
+        'USER': 'bold',
+        'PASSWORD': 'password',
+>>>>>>> 004e74585bf03221182e697af508b6bdb8f5f215
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -150,9 +155,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/assets/images')

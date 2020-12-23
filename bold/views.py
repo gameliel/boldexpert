@@ -2,7 +2,7 @@ from django.shortcuts import render
 from posts.models import Post
 from portfolio.models import Portfolio
 
-
+service_url='199.192.23.44'
 # Create your views here.
 
 
