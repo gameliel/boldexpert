@@ -17,14 +17,13 @@
                 <span style="color: #999999;">
                     <span style="font-size: 36pt;">
                         Design<br>
-                        post_detail            & culture visulle
+                         & culture visulle
                     </span>
                 </span>
             </h1>
             <hr>
             <nav>
                 <ul>
-                    <li class="active"><a href="#">All</a></li>
                     {% for category in categories %}
                     <li class="active"><a href="{% url 'blog_category' category.name %}">{{ category.name }}</a></li>
                     {% endfor %}

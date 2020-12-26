@@ -26,7 +26,7 @@
                 <ul>
                     <li class="active"><a href="#">All</a></li>
                     {% for category in categories %}
-                    <li class="active"><a href="#">{{ category.name }}</a></li>
+                        <li class="active"><a href="{% url 'portfolio_category' category.name %}">{{ category.name }}</a></li>
                     {% endfor %}
                 </ul>
             </nav>

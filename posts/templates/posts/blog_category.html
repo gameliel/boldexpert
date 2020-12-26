@@ -4,15 +4,61 @@
 
 {% block content %}
 
+<div class="container" style="padding-top: 115px;">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-sm-12">
+            <h1>
+                <span style="font-size: 36pt;">Blog</span>
+                <span style="font-size: 36pt;">
+                    <span style="color: #ff0000;">
+                        .<br/>
+                    </span>
+                </span>
+                <span style="color: #999999;">
+                    <span style="font-size: 36pt;">
+                        Design<br>
+                        & culture visulle
+                    </span>
+                </span>
+            </h1>
+            <hr>
+            <nav>
+                <ul>
+                    {% for category in categories %}
+                    <li class="active"><a href="{% url 'blog_category' category.name %}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        {% for recent in recents%}
+        <div class="col-md-8 col-sm-6">
+            <a href="{% url 'post_detail' recent.id %}">
+                <img src="{{ recent.image.url }}" class="w3-card" style="width: 100%;" alt="2nd">
+            </a>
+            <div class="caption" style="padding-top: 10px;">
+                <small>
+                    {{ recent.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+                   {% for category in post.categories.all %}
+                        <a href="{% url 'blog_category' category.name %}">
+                            {{ category.name }}
+                        </a>&nbsp;
+                    {% endfor %}
+                </small>
+                <p class="first-blog">{{ recent.body| safe |slice:":120" }}</p>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h1>{{ category | title}}</h1>
-            <hr>
             <div class="row" style="margin-top: 30px;">
                 {% for post in posts %}
                 <div class="col-md-4 col-lg-4 col-sm-12">
-                    <hr>
+                    
                     <img src="{{ post.image.url }}" class="w3-card" style="width: 100%;" alt="2nd">
                     <div class="caption" style="padding-top: 10px;">
                         <small>
@@ -24,7 +70,7 @@
                                 </a>&nbsp;
                             {% endfor %}
                         </small>
-                        <p>{{ post.body | slice:":100" }}</p>          
+                        <p>{{ post.body |safe| slice:":100" }}</p>          
                     </div>
                     <button class="btn btn-primary">Read More</button>
                 </div>

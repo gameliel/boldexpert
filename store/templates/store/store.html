@@ -65,7 +65,7 @@
             <div class="row">
                 {% for product in products %}
                 <div class="col-md-4 col-sm-12">
-                    <div class="w3-card">
+                    <div class="card">
                         <a href="{% url 'detail' product.id %}">
                             <img class="rself" src="{{ product.imageURL }}" style="width: 100%;">
                         </a>
@@ -107,7 +107,7 @@
             <div class="row" style="margin-top: 25px;">
                     {% for hot in hots %}
                 <div class="col-md-6 col-sm-12">
-                    <div class="w3-card">
+                    <div class="card">
                         <img class="rself" src="{{ hot.imageURL }}" style="width: 100%;">
                     <div>
                        <div class="container">
@@ -119,7 +119,7 @@
                                     <p>${{ hot.price|floatformat:2 }}</p>
                                 </div>
                                 <div class="col">
-                                    <button data-product={{ product.id }} data-action="add" class="btn btn-success add-btn button update-cart">Add to Cart</button>
+                                    <button data-product={{ hot.id }} data-action="add" class="btn btn-success add-btn button update-cart">Add to Cart</button>
                                 </div>
                             </div>
                        </div>
@@ -141,25 +141,30 @@
         </ul>
     </div>
     <div class="row" style="margin-bottom: 40px;">
-        <div class="col-md-3 col-sm-12">
-            <div class="w3-card">
-                <img class="rself" src="{% static 'assets/images/Untitled-4.png' %}" style="width: 100%;">
+        {% for feat in featured %}
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <a href="{% url 'detail' feat.id %}">
+                    <img class="rself" src="{{ feat.imageURL }}" style="width: 100%;">
+                </a>
             <div>
-               <div class="container">
-                    <h5 class="product_title">A4 Letter head</h5>
-                    <p>214mm by 120mm I Rim B4 paper</p>
+                <div class="container">
+                    <h5 class="product_title">{{ feat.name }}</h5>
+                    <p>{{ feat.description |slice:":100" }}</p>
+                    <p style="font-weight: bold;">{{ feat.category }}</p>
                     <div class="row" style="margin-top: 12px;">
                         <div class="col">
-                            <p>$5000</p>
+                            <p>${{ feat.price|floatformat:2 }}</p>
                         </div>
                         <div class="col">
-                            <button class=" btn btn-success button ">Add to Cart</button>
+                            <button data-product={{feat.id}} data-action="add" class="btn btn-success add-btn button update-cart">Add to Cart</button>
                         </div>
                     </div>
-               </div>
+                </div>
             </div>
             </div>
         </div>
+        {% endfor %}
         <button class="btn btn-outline-dark btn-block"> <i class="fa fa-recycle"></i> see more</button>
     </div>
 </div>

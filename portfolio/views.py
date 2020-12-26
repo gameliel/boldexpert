@@ -10,11 +10,25 @@ def portfolio(request):
     portfolios = Portfolio.objects.all().order_by("-created_on")[1:]
     # this is to take only the most recent post from DB
     recents = Portfolio.objects.all().order_by("-created_on")[:1]
-    context = {'portfolios':portfolios, 'recents':recents}
+    categories = Category.objects.all()
+    context = {'portfolios':portfolios, 'recents':recents, 'categories':categories}
     return render(request, 'portfolio.html', context)
 
 def detail(request, id):
     portfolio = get_object_or_404(Portfolio, id=id)
     photos = PortfolioImage.objects.filter(portfolio=portfolio)
-    context = {'portfolio':portfolio, 'photos':photos}
+    categories = Category.objects.all()
+    context = {'portfolio':portfolio, 'photos':photos, 'categories':categories}
     return render(request, 'detail.html', context)
+
+
+def portfolio_category(request, category):
+    recents = Portfolio.objects.filter(category__name__contains=category).order_by('-created_on')[:1]
+    categories = Category.objects.all()
+    portfolio = Portfolio.objects.filter(
+        category__name__contains=category
+        ).order_by(
+            '-created_on'
+        )
+    context = {'category':category, 'categories':categories, 'portfolio':portfolio, 'recents':recents}
+    return render(request, 'portfolio_category.html', context)

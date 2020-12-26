@@ -27,9 +27,17 @@
     </a>
 </div>
 <div class="container">
-    <h1>{{ post.title }}</h1>
-    <div class="row">
-        <div class="col-md-8 col-sm-12">
+    <div class="row" style="margin-top: 80px;">
+        <div class="col-md-2 col-sm-12" style="margin-top: 20px;">
+        <h5>Topics</h5>
+             <ul style=" margin-left: 26px;">
+                {% for category in categories %}
+                <li class="active"><a href="{% url 'blog_category' category.name %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>  
+        <div class="col-md-9">
+            <h1>{{ post.title }}</h1>
             <img src="{{ post.image.url }}" style="width: 100%;" class="card" alt="2nd">
             <!-- <h3>{{ post.title }}</h3> -->
             <small>
@@ -41,7 +49,7 @@
                     </a>&nbsp;
                 {% endfor %}
             </small>
-            <h5>About the project:</h5>
+            {% comment %} <h5>About the project:</h5> {% endcomment %}
             <p>{{ post.body | safe | linebreaks }}</p>
             <br>
             <h3>Leave a comment</h3>
@@ -66,11 +74,8 @@
                 <p> {{ comment.body }}</p>
                 <hr>
             {% endfor %}
-        </div>
-        <div class="col-md-4">
-          
-        </div>
-    </div>
+        </div>         
+    </div>    
 </div>
 
 {% endblock %}

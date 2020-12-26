@@ -26,16 +26,19 @@ def detail_view(request, id):
             )
             comment.save()
     comments = Comment.objects.filter(post=post)
+    categories = Category.objects.all()
     photos = PostImage.objects.filter(post=post)
-    context = {'post':post, 'recent':recent, 'photos':photos, 'comments':comments, 'form':form}
+    context = {'post':post, 'categories':categories, 'recent':recent, 'photos':photos, 'comments':comments, 'form':form}
     return render(request, 'posts/detail.html', context)
 
 
 def blog_category(request, category):
+    recents = Post.objects.filter(categories__name__contains=category).order_by('-created_on')[:1]
+    categories = Category.objects.all()
     posts = Post.objects.filter(
         categories__name__contains=category
         ).order_by(
             '-created_on'
         )
-    context = {'category':category, 'posts':posts}
+    context = {'category':category, 'categories':categories, 'posts':posts, 'recents':recents}
     return render(request, 'posts/blog_category.html', context)

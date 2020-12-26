@@ -39,6 +39,16 @@ def detail_view(request, id):
 	context = {'product':product, 'photos':photos, 'cartItems':cartItems}
 	return render(request, 'store/detail.html', context)
 
+def store_category(request, category):
+	products = Product.objects.filter(
+		categories_name_contains=category
+		).order_by(
+		'created_on'
+		)
+	context = {'products':products, 'category':category}
+	return render(request, 'store/store_category.html', context)
+
+
 def cart(request):
 
 	if request.user.is_authenticated:
