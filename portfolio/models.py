@@ -20,7 +20,7 @@ class CategoryBanner(models.Model):
 
 # Create your models here.
 class Portfolio(models.Model):
-    topic = models.CharField(max_length=100, null=True)
+    title = models.CharField(max_length=100, null=True)
     description = RichTextUploadingField()
     image = models.FileField(blank=True)
     status = models.BooleanField(default=None, null=True)
@@ -31,21 +31,21 @@ class Portfolio(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return self.topic
+        return self.title
 
 class PortfolioImage(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete = models.CASCADE, null=True)
     image = models.FileField(upload_to='images/')
 
     def __str__(self):
-        return self.portfolio.topic
+        return self.portfolio.title
 
 class Banner(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete = models.CASCADE, null=True)
     image = models.FileField(upload_to='images/')
 
     # def __str__(self):
-    #     return self.portfolio.topic
+    #     return self.portfolio.title
 
 
 

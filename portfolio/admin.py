@@ -15,7 +15,7 @@ class CategoryBannerAdmin(admin.StackedInline):
 
 @admin.register(Portfolio)
 class PortfolioAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'category', 'status', 'image', 'created_on')
+    list_display = ('title', 'category', 'status', 'image', 'created_on')
     search_fields = ['title', 'description']
     inlines = [PortfolioImageAdmin, BannerAdmin]
 
