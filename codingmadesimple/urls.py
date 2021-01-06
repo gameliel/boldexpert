@@ -12,7 +12,7 @@ urlpatterns = [
     path('blog/', include('posts.urls')),
     path('<int:id>/', views.detail, name="detailed"),
     path('store/', include('store.urls')),
-    path('portfolio/', include('portfolio.urls')),
+    path('explore/', include('portfolio.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     # path('paystack/', include(('paystack.urls', 'paystack'), namespace='paystack'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

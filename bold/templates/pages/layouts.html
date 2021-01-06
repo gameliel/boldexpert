@@ -54,18 +54,19 @@ h4{
 <body>
     <div class="bs-example">
         <nav class="navbar fixed-top navbar-expand-md navbar-light bg-dark">
-            <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'assets/images/boldexperts.png' %}" alt=""></a>
+            <div class="container">
+                <a href="{% url 'explore' %}" class="navbar-brand"><img src="{% static 'assets/images/boldexperts.png' %}" style="width: 30%;" alt=""></a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
     
             <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
                 <div class="navbar-nav">
-                    <a href="{% url 'portfolio' %}" class="nav-item nav-link active">Explore</a>
+                    <a href="{% url 'explore' %}" class="nav-item nav-link active">Explore</a>
                     <div class="nav-item dropdown">
                         <a href="{% url 'home' %}" class="nav-link dropdown-toggle" data-toggle="dropdown">Agency</a>
                         <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Agency</a>
+                            <a href="{% url 'home' %}" class="dropdown-item">Agency</a>
                             <a href="{% url 'expertise' %}" class="dropdown-item">Expertise</a>
                             <a href="{% url 'approach' %}" class="dropdown-item">Approach</a>
                             <a href="{% url 'people' %}" class="dropdown-item">Team</a>
@@ -82,6 +83,7 @@ h4{
                         </div>
                     </div>
                     <a href="{% url 'store' %}" class="nav-item nav-link">Store</a>
+            </div>
                 </div>
             </div>
         </nav>
@@ -97,27 +99,44 @@ h4{
 {% endblock %}
 <div class="container" style="padding-top:70px; padding-bottom: 70px;">
     <div class="row">
-        <div class="col">
+        <!-- <div class="col">
             <h4>Paris agency</h4>
             <p>3 rue des Montiboeufs
                 75020 - Paris France</p>
-        </div>
+        </div> -->
         <div class="col">
-            <h4>Lyon agency</h4>
-            <p>3 rue Abbé Rozier
-                69001 - Lyon France</p>
+            <h4>Nigeria agency</h4>
+            <p>3 Prime Estate Port Harcourt
+                 Nigeria</p>
         </div>
         <div class="col">
             <h4>Contact us</h4>
-            <p>Tel: +33 (0)9 72 26 62 31
-                <span style="color: red;">Request a quotation</span></p>
+            <p>Tel: +234 902 598 7848
+                <a href="{% url 'contact' %}"><span style="color: red;">Request a quotation</span></a></p>
         </div>
-                <div class="col">
+        <div class="col-md-3 col-sm-12">
             <h4>Follow us</h4>
-            <p>Tel: +33 (0)9 72 26 62 31
-                <span style="color: red;">Request a quotation</span></p>
+            <div class="row">
+                <div class="col">
+                    <img src="{% static 'assets/img/Facebook iconIcon.svg' %}" alt="">
+                </div>
+                <div class="col">
+                    <img src="{% static 'assets/img/Behance iconIcon.svg' %}" alt="">
+                </div>
+                <div class="col">
+                    <img src="{% static 'assets/img/Instagram iconIcon.svg' %}" alt="">
+                </div>
+                <div class="col">
+                    <img src="{% static 'assets/img/LinkedIn iconIcon.svg' %}" alt="">
+                </div>
+                <div class="col">
+                    <img src="{% static 'assets/img/Twitter iconIcon.svg' %}" alt="">
+                </div>
+                <div class="col">
+                    <img src="{% static 'assets/img/Youtube iconIcon.svg' %}" alt="">
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
 </footer>

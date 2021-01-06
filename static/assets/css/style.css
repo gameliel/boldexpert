@@ -43,3 +43,11 @@ p{
 .card-body{
     background-color: ivory !important;
 }
+.prescription > a:hover{
+    color: white;
+    text-decoration: none;
+}
+.btn-link:hover{
+    text-decoration: none;
+    color: #333131;
+}

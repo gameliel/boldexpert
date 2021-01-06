@@ -1,79 +1,42 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from .forms import CreateUserForm
 from django.http import JsonResponse
 import json
 import datetime
-from .models import * 
+from .models import *
+from .utils import cookieCart,  cartData
 
 def store(request):
+	data = cartData(request)
 
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		items = order.orderitem_set.all()
-		cartItems = order.get_cart_items
-	else:
-		items = []
-		order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-		cartItems = order['get_cart_items']
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
 
-	products = Product.objects.filter(hot=0, featured=0)
-	hots = Product.objects.filter(hot=1)
-	featured = Product.objects.filter(featured=1)
-	context = {'products':products, 'cartItems':cartItems, 'hots':hots, 'featured':featured}
+	products = Product.objects.all()
+	context = {'products':products, 'cartItems':cartItems}
 	return render(request, 'store/store.html', context)
 
 
-def detail_view(request, id):
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		items = order.orderitem_set.all()
-		cartItems = order.get_cart_items
-	else:
-		items = []
-		order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-		cartItems = order['get_cart_items']
-
-	product = get_object_or_404(Product, id=id)
-	photos = ProductImage.objects.filter(product=product)
-	context = {'product':product, 'photos':photos, 'cartItems':cartItems}
-	return render(request, 'store/detail.html', context)
-
-def store_category(request, category):
-	products = Product.objects.filter(
-		categories_name_contains=category
-		).order_by(
-		'created_on'
-		)
-	context = {'products':products, 'category':category}
-	return render(request, 'store/store_category.html', context)
-
-
 def cart(request):
+	data = cartData(request)
 
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		items = order.orderitem_set.all()
-		cartItems = order.get_cart_items
-	else:
-		items = []
-		order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-		cartItems = order['get_cart_items']
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
 
 	context = {'items':items, 'order':order, 'cartItems':cartItems}
 	return render(request, 'store/cart.html', context)
 
 def checkout(request):
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		items = order.orderitem_set.all()
-		cartItems = order.get_cart_items
-	else:
-		items = []
-		order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-		cartItems = order['get_cart_items']
+	data = cartData(request)
+	
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
 
 	context = {'items':items, 'order':order, 'cartItems':cartItems}
 	return render(request, 'store/checkout.html', context)
@@ -110,23 +73,35 @@ def processOrder(request):
 	if request.user.is_authenticated:
 		customer = request.user.customer
 		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		total = float(data['form']['total'])
-		order.transaction_id = transaction_id
-
-		if total == order.get_cart_total:
-			order.complete = True
-		order.save()
-
-		if order.shipping == True:
-			ShippingAddress.objects.create(
-			customer=customer,
-			order=order,
-			address=data['shipping']['address'],
-			city=data['shipping']['city'],
-			state=data['shipping']['state'],
-			zipcode=data['shipping']['zipcode'],
-			)
 	else:
-		print('User is not logged in')
+		customer, order = guestOrder(request, data)
+
+	total = float(data['form']['total'])
+	order.transaction_id = transaction_id
+
+	if total == order.get_cart_total:
+		order.complete = True
+	order.save()
+
+	if order.shipping == True:
+		ShippingAddress.objects.create(
+		customer=customer,
+		order=order,
+		address=data['shipping']['address'],
+		city=data['shipping']['city'],
+		state=data['shipping']['state'],
+		zipcode=data['shipping']['zipcode'],
+		)
 
 	return JsonResponse('Payment submitted..', safe=False)
+
+def detail_view(request, id):
+	data = cartData(request)
+	
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+	product = get_object_or_404(Product, id=id)
+	photos = ProductImage.objects.filter(product=product)
+	context = {'product':product, 'photos':photos, 'items':items, 'order':order, 'cartItems':cartItems}
+	return render(request, 'store/detail.html', context)

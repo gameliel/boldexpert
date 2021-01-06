@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<div id="demo" class="carousel slide" data-ride="carousel" style="margin-top: 94px;">
+<div id="demo" class="carousel slide" data-ride="carousel" style="margin-top: 65px;">
 
   <!-- Indicators -->
   <ul class="carousel-indicators">
@@ -76,7 +76,7 @@
         <a href="{% url 'detailed' portfolio.id %}"><img src="{{ portfolio.image.url }}" style="width: 100%;" alt="2nd"></a>
         <div class="caption" style="padding-top: 10px;">
             <p class="first-blog">{{ portfolio.title }}</p>
-            <p>{{ portfolio.description|safe|slice:":100" }}</p>
+            <!-- <p>{{ portfolio.description|safe|slice:":100" }}</p> -->
         </div>
     </div>
     {% endfor %}

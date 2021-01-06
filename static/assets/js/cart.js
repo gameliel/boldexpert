@@ -8,18 +8,21 @@ for (i = 0; i < updateBtns.length; i++) {
 		console.log('USER:', user)
 
 		if (user == 'AnonymousUser'){
-			console.log('User is not authenticated')
-			
+			addCookieItem(productId, action)
 		}else{
 			updateUserOrder(productId, action)
 		}
 	})
 }
 
+function addCookieItem(productId, action){
+	console.log('not logged in..')
+}
+
 function updateUserOrder(productId, action){
 	console.log('User is authenticated, sending data...')
 
-		var url = '/store/update_item/'
+		var url = '/update_item/'
 
 		fetch(url, {
 			method:'POST',
@@ -33,7 +36,32 @@ function updateUserOrder(productId, action){
 		   return response.json();
 		})
 		.then((data) => {
-			console.log('Data:', data)
-			location.reload()
+		    location.reload()
 		});
+}
+
+function addCookieItem(productId, action){
+	console.log('User is not authenticated')
+
+	if (action == 'add'){
+		if (cart[productId] == undefined){
+		cart[productId] = {'quantity':1}
+
+		}else{
+			cart[productId]['quantity'] += 1
+		}
+	}
+
+	if (action == 'remove'){
+		cart[productId]['quantity'] -= 1
+
+		if (cart[productId]['quantity'] <= 0){
+			console.log('Item should be deleted')
+			delete cart[productId];
+		}
+	}
+	console.log('CART:', cart)
+	document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+	
+	location.reload()
 }

@@ -12,6 +12,15 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class CategoryBanner(models.Model):
+    category = models.ForeignKey(Category, on_delete = models.CASCADE, null=True)
+    image = models.FileField(upload_to='images/')
+
+    def __str__(self):
+        return self.category.name
+
+
+
 STATUS = (
     (0,"Draft"),
     (1,"Publish")
@@ -32,6 +41,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Banner(models.Model):
+    image = models.FileField(upload_to='images/')
 
 
 class PostImage(models.Model):

@@ -8,7 +8,8 @@ def blog(request):
     posts = Post.objects.filter(status=1).order_by('-created_on')[1:]
     recents = Post.objects.filter(status=1).order_by('-created_on')[:1]
     categories = Category.objects.all()
-    context = {'posts':posts, 'categories':categories, 'recents':recents}
+    banner = Banner.objects.all()
+    context = {'posts':posts, 'categories':categories, 'recents':recents, 'banner':banner}
     return render(request, 'posts/index.html', context)
 
 
@@ -35,10 +36,11 @@ def detail_view(request, id):
 def blog_category(request, category):
     recents = Post.objects.filter(categories__name__contains=category).order_by('-created_on')[:1]
     categories = Category.objects.all()
+    categorybanner = CategoryBanner.objects.all()
     posts = Post.objects.filter(
         categories__name__contains=category
         ).order_by(
             '-created_on'
         )
-    context = {'category':category, 'categories':categories, 'posts':posts, 'recents':recents}
+    context = {'category':category, 'categorybanner':categorybanner, 'categories':categories, 'posts':posts, 'recents':recents}
     return render(request, 'posts/blog_category.html', context)

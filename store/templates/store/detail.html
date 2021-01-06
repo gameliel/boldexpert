@@ -5,35 +5,39 @@
 {% block content %}
 
 <div class="container" style="padding-top: 130px;"> 
-    <div class="row">
-        <div class="col-md-8 w3-card-4" style="margin-left: 20px;">
+    <div class="row ">
+        <div class="col-md-8 border card" >
             <div class="row">
                 <div class="col-md-4">
-                    <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" style="padding-top: 24px;">
-                        <!-- Carousel indicators -->
-                        <ol class="carousel-indicators">
+                    <!-- carusell starts here -->
+                    <div class="w3-content w3-section" style="max-width:500px">
                         {% for p in photos %}
-                            <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %} active {% endif %}"></li>
+                        <img class="mySlides w3-animate-fading" src="{{ p.image.url }}" style="width:100%">
                         {% endfor %}
-                        </ol>
-                        <!-- Wrapper for carousel items -->
-                        <div class="carousel-inner">
-                            {% for p in photos %}
-                            <div class="carousel-item active">
-                                <img src="{{ p.image.url }}" style="width: 100%;" alt="First Slide">  
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <!-- Carousel controls -->
-                        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </a>
-                        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </a>
                     </div>
+                
+                      <script>
+                      var myIndex = 0;
+                      carousel();
+                      
+                      function carousel() {
+                        var i;
+                        var x = document.getElementsByClassName("mySlides");
+                        for (i = 0; i < x.length; i++) {
+                          x[i].style.display = "none";  
+                        }
+                        myIndex++;
+                        if (myIndex > x.length) {myIndex = 1}    
+                        x[myIndex-1].style.display = "block";  
+                        setTimeout(carousel, 9000);    
+                      }
+                      </script>  
+                    <!-- slide  ends here -->
                 </div>
                 <div class="col-md-8" style="margin-top: 24px;">
+                    <small>
+                        Tags: {{ product.tags }}
+                    </small>
                     <h3>{{ product.name}}</h3>
                     <small>
                         Categories: {{ product.category }}
@@ -47,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 offset w3-card-4" style="margin-left: 55px; margin-bottom: ;">
+        <div class="col-md-3 offset-1 card">
             <div class="container">
                 <h5 style="text-transform: uppercase; text-align: center; margin-top: 20px;;">Delivery & Returns</h5>
                 <hr>
@@ -66,19 +70,57 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container"> 
     <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-        <div class="col-md-8 card" style="margin-left: 20px;">
+        <div class="col-md-8 card">
             <div class="container">
                 <div class="card-head">
                     <h4 style="text-transform: capitalize;">product details</h4>
                 </div>
                 <hr>
                 <div class="card-body"> 
-                    <p>{{ product.description}}</p>
+                    <p>{{ product.description|safe}}</p>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-8 col-sm-12 card">
+            <div class="container">
+                <h5>Specifications</h5>
+                <hr>
+            <div class="row">
+                <div class="col-md-6 card">
+                    <div class="card-head">
+                        <h5>Key features</h5>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ product.features|safe }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 card">
+                    <div class="card-head">
+                        <h5>Whats in the box</h5>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ product.content|safe }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 card">
+                    <div class="card-head">
+                        <h5>Specifications</h5>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ product.specification|safe }}</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}

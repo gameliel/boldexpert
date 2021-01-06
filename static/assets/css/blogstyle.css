@@ -76,3 +76,7 @@ ul > li > a:hover{
     font-size: 80px !important;
     text-transform: capitalize;
 }
+.prescription > a:hover{
+    color: white;
+    text-decoration: none;
+}
